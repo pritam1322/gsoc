@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { trpc } from "@/trpc-client/client";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+
 
 export function CreateChannel({ className = '' } : { className? : string }) {
   const { data: session } = useSession();
