@@ -24,8 +24,9 @@ export function CreateChannel({ className = '' } : { className? : string }) {
   const [companyName, setCompanyName] = useState("");
   const [tag, setTag] = useState("");
   const [open, setOpen] = useState(false); // Controls dialog visibility
-  const router = useRouter();
   const channel = trpc.createChannel.useMutation();
+
+  const mentorId = session?.user?.id || undefined;
 
   const handleCreate = async () => {
     if (!channelName.trim() || !companyName.trim()) {
@@ -38,7 +39,7 @@ export function CreateChannel({ className = '' } : { className? : string }) {
         name: channelName,
         companyname: companyName,
         tag: tag,
-        userId: session?.user?.id!,
+        userId: mentorId!,
       });
 
       toast.success(`✅ Channel Created! Invite Link: ${newChannel.inviteLink}`);
