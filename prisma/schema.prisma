@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(uuid())
+  name              String
+  email             String    @unique
+  password          String?
+  usertype          String?
+  image             String?
+  emailVerified     DateTime? @map(name: "email_verified")
+  gmailAccessToken  String?
+  gmailRefreshToken String?
+  Account           Account[]
+  channels          Channel[] @relation("UserChannels")
+  Channel           Channel[]
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  userId            String  @unique //Changed to Int to match User ID type
+  user              User    @relation(fields: [userId], references: [id]) // Relation to User model
+
+  @@unique([provider, providerAccountId]) // Composite key for provider and account ID
+  @@index([userId])
+}
+
+model Channel {
+  id              String @id @default(uuid())
+  name            String
+  inviteLink      String @unique
+  mentorId        String
+  companyname     String
+  tag             String
+  status          String
+  mentor          User   @relation(fields: [mentorId], references: [id])
+  members         User[] @relation("UserChannels")
+}
