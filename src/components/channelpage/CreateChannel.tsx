@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { trpc } from "@/trpc-client/client";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+
 
 export function CreateChannel({ className = '' } : { className? : string }) {
   const { data: session } = useSession();
@@ -24,8 +24,9 @@ export function CreateChannel({ className = '' } : { className? : string }) {
   const [companyName, setCompanyName] = useState("");
   const [tag, setTag] = useState("");
   const [open, setOpen] = useState(false); // Controls dialog visibility
-  const router = useRouter();
   const channel = trpc.createChannel.useMutation();
+
+  const mentorId = session?.user?.id || undefined;
 
   const handleCreate = async () => {
     if (!channelName.trim() || !companyName.trim()) {
@@ -38,7 +39,7 @@ export function CreateChannel({ className = '' } : { className? : string }) {
         name: channelName,
         companyname: companyName,
         tag: tag,
-        userId: session?.user?.id!,
+        userId: mentorId!,
       });
 
       toast.success(`✅ Channel Created! Invite Link: ${newChannel.inviteLink}`);

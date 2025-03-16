@@ -52,10 +52,10 @@ export default function Hero(){
                 </div>
                 <div className="hidden lg:block absolute -right-20 top-20 bg-black backdrop-blur-sm p-4 rounded-lg shadow-xl transform rotate-3 w-80 border border-indigo-500/30">
                     <div className="text-sm font-mono text-gray-200">
-                        <div className="text-indigo-400">import { <span className="text-green-400">useState</span> } from 'react';</div>
+                        <div className="text-indigo-400">import { <span className="text-green-400">useState</span> } from &apos;react&apos;;</div>
                         <div className="text-indigo-400">function <span className="text-yellow-400">ProposalBuilder</span>() {"{"}</div>
                         <div className="ml-4 text-white">const [proposal, setProposal] = <span className="text-yellow-400">useState</span>();</div>
-                        <div className="ml-4 text-pink-400">// AI-powered suggestions</div>
+                        {/* <div className="ml-4 text-pink-400">// AI-powered suggestions</div> */}
                         <div className="text-indigo-400">{"}"}</div>
                     </div>
                 </div>

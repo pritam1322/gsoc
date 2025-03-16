@@ -28,7 +28,7 @@ import {
 import { useRouter } from "next/navigation";
 import LoginButton from "@/components/landingPage/LoginButton";
 import { toast } from "sonner"
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 
 
@@ -41,7 +41,7 @@ const formSchema = z.object({
 export default function LoginPage() {
 
     const router = useRouter();
-    const { data : session, status } = useSession();
+    // const { data : session, status } = useSession();
 
     // if(status === 'unauthenticated'){
     //     router.push('/');
